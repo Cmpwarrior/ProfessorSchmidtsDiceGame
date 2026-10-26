@@ -4,8 +4,6 @@ from playsound3 import playsound
 import random
 import time
 
-dicerollsfx = ["sounds/dice1.mp3", "sounds/dice2.mp3", "sounds/dice3.mp3", "sounds/dice4.mp3", "sounds/dice5.mp3"]
-
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS
@@ -14,6 +12,7 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+dicerollsfx = [resource_path("sounds/dice1.mp3"), resource_path("sounds/dice2.mp3"), resource_path("sounds/dice3.mp3"), resource_path("sounds/dice4.mp3"), resource_path("sounds/dice5.mp3")]
 
 dicecolors = ["green", "purple", "blue", "orange"]
 dicenumbers = [[3, 3, 3, 3, 3, 3], [0, 0, 4, 4, 4, 4], [1, 1, 1, 5, 5, 5], [2, 2, 2, 2, 6, 6]]
@@ -82,7 +81,7 @@ if playerscore == schmidtscore:
         time.sleep(3)
 if playerscore > schmidtscore:
     print(f"\nIt seems that you won! This is almost as bad as that time I lost to my CS 113 students two years in a row...")
-    playsound("sounds/victory.mp3")
+    playsound(resource_path("sounds/victory.mp3"))
 elif playerscore < schmidtscore:
     print(f"\nIt seems that I won! It's a good thing that probability doesn't require a math licsense to learn!")
-    playsound("sounds/defeat.mp3")
+    playsound(resource_path("sounds/defeat.mp3"))
