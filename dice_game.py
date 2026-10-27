@@ -23,6 +23,7 @@ def resource_path(relative_path):
 dicerollsfx = [resource_path("sounds/dice1.mp3"), resource_path("sounds/dice2.mp3"), resource_path("sounds/dice3.mp3"), resource_path("sounds/dice4.mp3"), resource_path("sounds/dice5.mp3")]
 
 dicecolors = ["green", "purple", "blue", "orange"]
+dicecolorsshort = ["g", "p", "b", "o"]
 dicenumbers = [[3, 3, 3, 3, 3, 3], [0, 0, 4, 4, 4, 4], [1, 1, 1, 5, 5, 5], [2, 2, 2, 2, 6, 6]]
 textcolors = [GREEN, PURPLE, BLUE, ORANGE]
 
@@ -37,17 +38,20 @@ To begin, you must first select a die to use. Your options are:
 playerchoice = input("Please input the color of your selected die.\n").lower()
 while True:
     if playerchoice in dicecolors:
+        playerdice = dicenumbers[dicecolors.index(playerchoice)]
+        break
+    elif playerchoice in dicecolorsshort:
+        playerdice = dicenumbers[dicecolorsshort.index(playerchoice)]
         break
     else:
         playerchoice = (input("Sorry, none of the dice seem to come in that color. Try inputting a color on the list above.\n")).lower()
 
-playerdice = dicenumbers[dicecolors.index(playerchoice)]
-if dicecolors.index(playerchoice) == 3:
+if dicenumbers.index(playerdice) == 3:
     schmidtdice = dicenumbers[0]
     print(f"\nYou chose the {ORANGE}orange{RESET} die. Now it's my turn to choose a die, and I'll choose the {GREEN}green{RESET} die.")
 else:
-    schmidtdice = dicenumbers[dicecolors.index(playerchoice) + 1]
-    print(f"\nYou chose the {textcolors[dicecolors.index(playerchoice)]}{playerchoice}{RESET} die. Now it's my turn to choose a die, and I'll choose the {textcolors[dicecolors.index(playerchoice) + 1]}{dicecolors[dicecolors.index(playerchoice) + 1]}{RESET} die.")
+    schmidtdice = dicenumbers[dicenumbers.index(playerdice) + 1]
+    print(f"\nYou chose the {textcolors[dicenumbers.index(playerdice)]}{dicecolors[dicenumbers.index(playerdice)]}{RESET} die. Now it's my turn to choose a die, and I'll choose the {textcolors[dicenumbers.index(playerdice) + 1]}{dicecolors[dicenumbers.index(playerdice) + 1]}{RESET} die.")
 
 playerscore = 0
 schmidtscore = 0
