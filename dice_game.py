@@ -4,6 +4,13 @@ from playsound3 import playsound
 import random
 import time
 
+RED = "\x1b[38;5;196m"
+GREEN = "\x1b[38;5;40m"
+PURPLE = "\x1b[38;5;91m"
+BLUE = "\x1b[38;5;39m"
+ORANGE = "\x1b[38;5;208m"
+RESET = "\x1b[0m"
+
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS
@@ -12,18 +19,20 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
+
 dicerollsfx = [resource_path("sounds/dice1.mp3"), resource_path("sounds/dice2.mp3"), resource_path("sounds/dice3.mp3"), resource_path("sounds/dice4.mp3"), resource_path("sounds/dice5.mp3")]
 
 dicecolors = ["green", "purple", "blue", "orange"]
 dicenumbers = [[3, 3, 3, 3, 3, 3], [0, 0, 4, 4, 4, 4], [1, 1, 1, 5, 5, 5], [2, 2, 2, 2, 6, 6]]
+textcolors = [GREEN, PURPLE, BLUE, ORANGE]
 
-print("""Welcome to Professor Schmidt's dice gambling game! I'm Professor Schmidt, and I will be your opponent for today's game.
+print(f"""Welcome to Professor Schmidt's dice gambling game! I'm Professor Schmidt, and I will be your opponent for today's game.
 To begin, you must first select a die to use. Your options are:
 
-Green dice: [3, 3, 3, 3, 3, 3]
-Purple dice: [0, 0, 4, 4, 4, 4]
-Blue dice: [1, 1, 1, 5, 5, 5]
-Orange dice: [2, 2, 2, 2, 6, 6]
+{GREEN}Green{RESET} dice: [3, 3, 3, 3, 3, 3]
+{PURPLE}Purple{RESET} dice: [0, 0, 4, 4, 4, 4]
+{BLUE}Blue{RESET} dice: [1, 1, 1, 5, 5, 5]
+{ORANGE}Orange{RESET} dice: [2, 2, 2, 2, 6, 6]
 """)
 playerchoice = input("Please input the color of your selected die.\n").lower()
 while True:
@@ -35,10 +44,10 @@ while True:
 playerdice = dicenumbers[dicecolors.index(playerchoice)]
 if dicecolors.index(playerchoice) == 3:
     schmidtdice = dicenumbers[0]
-    print(f"\nYou chose the orange die. Now it's my turn to choose a die, and I'll choose the green die.")
+    print(f"\nYou chose the {ORANGE}orange{RESET} die. Now it's my turn to choose a die, and I'll choose the {GREEN}green{RESET} die.")
 else:
     schmidtdice = dicenumbers[dicecolors.index(playerchoice) + 1]
-    print(f"\nYou chose the {playerchoice} die. Now it's my turn to choose a die, and I'll choose the {dicecolors[dicecolors.index(playerchoice) + 1]} die.")
+    print(f"\nYou chose the {textcolors[dicecolors.index(playerchoice)]}{playerchoice}{RESET} die. Now it's my turn to choose a die, and I'll choose the {textcolors[dicecolors.index(playerchoice) + 1]}{dicecolors[dicecolors.index(playerchoice) + 1]}{RESET} die.")
 
 playerscore = 0
 schmidtscore = 0
@@ -53,10 +62,10 @@ for round in range(10):
 
     if playerdice[playerroll] > schmidtdice[schmidtroll]:
         playerscore += 1
-        print(f"You rolled a {playerdice[playerroll]}. I rolled a {schmidtdice[schmidtroll]}. You win this round.")
+        print(f"You rolled a {playerdice[playerroll]}. I rolled a {schmidtdice[schmidtroll]}. {GREEN}You win this round.{RESET}")
     else:
         schmidtscore += 1
-        print(f"You rolled a {playerdice[playerroll]}. I rolled a {schmidtdice[schmidtroll]}. I win this round.")
+        print(f"You rolled a {playerdice[playerroll]}. I rolled a {schmidtdice[schmidtroll]}. {RED}I win this round.{RESET}")
     time.sleep(3)
 
 print(f"\nAnd now, it is time to tally up the scores.")
@@ -80,8 +89,8 @@ if playerscore == schmidtscore:
         print(f"You rolled a {playerdice[playerroll]}. I rolled a {schmidtdice[schmidtroll]}.")
         time.sleep(3)
 if playerscore > schmidtscore:
-    print(f"\nIt seems that you won! This is almost as bad as that time I lost to my CS 113 students two years in a row...")
+    print(f"\n{GREEN}It seems that you won!{RESET} This is almost as bad as that time I lost to my CS 113 students two years in a row...")
     playsound(resource_path("sounds/victory.mp3"))
 elif playerscore < schmidtscore:
-    print(f"\nIt seems that I won! It's a good thing that probability doesn't require a math licsense to learn!")
+    print(f"\n{RED}It seems that I won!{RESET} It's a good thing that probability doesn't require a math licsense to learn!")
     playsound(resource_path("sounds/defeat.mp3"))
