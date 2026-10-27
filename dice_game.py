@@ -44,7 +44,7 @@ while True:
         playerdice = dicenumbers[dicecolorsshort.index(playerchoice)]
         break
     else:
-        playerchoice = (input("Sorry, none of the dice seem to come in that color. Try inputting a color on the list above.\n")).lower()
+        playerchoice = (input("\nSorry, none of the dice seem to come in that color. Try inputting a color on the list above.\n")).lower()
 
 if dicenumbers.index(playerdice) == 3:
     schmidtdice = dicenumbers[0]
