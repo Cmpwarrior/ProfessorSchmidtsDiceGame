@@ -96,5 +96,5 @@ if playerscore > schmidtscore:
     print(f"\n{GREEN}It seems that you won!{RESET} This is almost as bad as that time I lost to my CS 113 students two years in a row...")
     playsound(resource_path("sounds/victory.mp3"))
 elif playerscore < schmidtscore:
-    print(f"\n{RED}It seems that I won!{RESET} It's a good thing that probability doesn't require a math licsense to learn!")
+    print(f"\n{RED}It seems that I won!{RESET} It's a good thing that probability doesn't require a math license to learn!")
     playsound(resource_path("sounds/defeat.mp3"))
